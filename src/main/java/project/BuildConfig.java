@@ -1,1 +1,1 @@
-public class BuildConfig {    public static String version = "1.1.9";}
+package project;public class BuildConfig {    public static String version = "1.1.9";}

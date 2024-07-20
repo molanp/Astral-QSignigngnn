@@ -411,6 +411,9 @@ class QSecJni(
             )
             return null
         }
+        if ("java/lang/VMClassLoader->findLoadedClass(Ljava/lang/ClassLoader;Ljava/lang/String;)Ljava/lang/Class;" == signature) {
+            return null
+        }
         if (signature == "android/content/Context->getApplicationInfo()Landroid/content/pm/ApplicationInfo;") {
             return vm.resolveClass("android/content/pm/ApplicationInfo").newObject(null)
         }

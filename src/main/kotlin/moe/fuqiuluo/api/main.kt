@@ -1,6 +1,5 @@
 package moe.fuqiuluo.api
 
-import BuildConfig
 import CONFIG
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -8,6 +7,7 @@ import io.ktor.server.routing.*
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moe.fuqiuluo.comm.Protocol
+import project.BuildConfig
 
 @Serializable
 data class APIResult<T>(

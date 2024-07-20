@@ -65,6 +65,7 @@ tasks {
         dir.resolve("BuildConfig.java").also {
             if (!it.exists()) it.createNewFile()
         }.writer().use {
+            it.write("package project;")
             it.write("public class BuildConfig {")
             it.write("    public static String version = \"${project.version}\";")
             it.write("}")
