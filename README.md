@@ -1,7 +1,10 @@
-# fork版本 非原创
-
+# fork版本 Started at 9.0.56 
 
 获取QQSign参数通过Unidbg，开放HTTP API。unidbg-fetch-sign最低从QQ8.9.33（不囊括）开始支持，TIM不支持。
+
+从qsign删库跑路开始（9.0）不支持，俺懒得适配旧版本。
+
+从9.0.56开始支持。
 
 # 切记
 

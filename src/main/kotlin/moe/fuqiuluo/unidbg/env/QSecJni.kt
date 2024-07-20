@@ -15,11 +15,11 @@ import moe.fuqiuluo.comm.EnvData
 import moe.fuqiuluo.ext.toHexString
 import moe.fuqiuluo.unidbg.QSecVM
 import moe.fuqiuluo.unidbg.vm.GlobalData
+import moe.fuqiuluo.utils.MD5
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.security.SecureRandom
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -163,6 +163,17 @@ class QSecJni(
                         .toString() + "|" + this.vm.envData.version
 
                     "DeviceToken-APN-V001", "DeviceToken-TuringCache-V001", "DeviceToken-MAC-ADR-V001", "DeviceToken-wifissid-V001" -> "-1"
+
+                    "SensorList-20231221" -> MD5.toMD5Byte(System.currentTimeMillis().toString() + "NI MAMA BAOZHA").toHexString(false)
+                    "FONT-LIST-20231221" -> MD5.toMD5Byte(System.currentTimeMillis().toString() + "NI MAMA BAOZHA2").toHexString(false)
+                    "kO3WhiteCmdListKey" -> ""
+                    "USB-ST-20231221" -> "mtp,adb"
+                    "SIM-ST-20231221" -> "0"
+                    "SDCRAD-INFO-20231221" -> "-1"
+                    "LOCKGUARD-INFO-20231221" -> "1"
+                    "ASSIST-LIST-20231221","ASSIST-OPENED-20231221" -> "[]"
+                    "ASSIST-ST-20231221" -> "1"
+                    "SYSTEM_STARTTIME-20240104" -> (System.currentTimeMillis()-123456).toString()
                     else -> error("Not support mmKVValue:$key")
                 }
             )
@@ -387,7 +398,7 @@ class QSecJni(
         dvmObject: DvmObject<*>,
         signature: String,
         vaList: VaList
-    ): DvmObject<*> {
+    ): DvmObject<*>? {
         if (signature == "android/content/Context->getApplicationInfo()Landroid/content/pm/ApplicationInfo;") {
             return vm.resolveClass("android/content/pm/ApplicationInfo").newObject(null)
         }
@@ -457,6 +468,9 @@ class QSecJni(
         if ("android/content/Context->toString()Ljava/lang/String;" == signature) {
             return StringObject(vm, dvmObject.value.toString())
         }
+        if ("android/content/ContentResolver->acquireContentProviderClient(Ljava/lang/String;)Landroid/content/ContentProviderClient;" == signature) {
+            return null
+        }
         return super.callObjectMethodV(vm, dvmObject, signature, vaList)
     }
 
@@ -467,6 +481,9 @@ class QSecJni(
         }
         if (signature == "com/tencent/qqprotect/qsec/QSecFramework->goingUp(JJJJLjava/lang/Object;Ljava/lang/Object;[Ljava/lang/Object;[Ljava/lang/Object;)I"
             && envData.packageName == "com.tencent.mobileqq") {
+            return false
+        }
+        if ("com/tencent/mobileqq/dt/app/Dtc->systemGetsafe(Ljava/lang/String;)Ljava/lang/String" == signature) {
             return false
         }
         if (CONFIG.unidbg.debug) {
