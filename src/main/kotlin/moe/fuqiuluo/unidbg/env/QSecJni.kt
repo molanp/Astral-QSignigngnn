@@ -399,6 +399,18 @@ class QSecJni(
         signature: String,
         vaList: VaList
     ): DvmObject<*>? {
+        if ("android/content/pm/PackageManager->getPackageGids(Ljava/lang/String;)[I" == signature) {
+            vm.throwException(
+                vm.resolveClass("android/content/pm/PackageManager/NameNotFoundException").newObject(null)
+            )
+            return null
+        }
+        if ("android/content/pm/IPackageManager->getPackageGids(Ljava/lang/String;II)[I" == signature) {
+            vm.throwException(
+                vm.resolveClass("android/content/pm/PackageManager/NameNotFoundException").newObject(null)
+            )
+            return null
+        }
         if (signature == "android/content/Context->getApplicationInfo()Landroid/content/pm/ApplicationInfo;") {
             return vm.resolveClass("android/content/pm/ApplicationInfo").newObject(null)
         }
