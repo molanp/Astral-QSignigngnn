@@ -1,31 +1,37 @@
-# fork版本 Started at 9.0.56 
+# --- Astral-QSignigngnn ---
+
+## Fork版本 Started at 9.0.56 
 
 获取QQSign参数通过Unidbg，开放HTTP API。unidbg-fetch-sign最低从QQ8.9.33（不囊括）开始支持，TIM不支持。
 
 从qsign删库跑路开始（9.0）不支持，俺懒得适配旧版本。
 
-从9.0.56开始支持。
+**从9.0.56开始支持。**
 
-# 切记
+## 切记
 
  - 公共API具有高风险可能
  - 请使用与协议对应版本的libfekit.so文件
  - QSign基于Android平台，其它平台Sign计算的参数不同，不互通（例如：IPad）。
  - 不支持载入Tim.apk的so文件。
+ - 为了保证作者的人身**氨醛**，作者绕过了一些致命性检测，但是`故意保留`了一部分，使用本签名将会被腾讯精准检测，具体表现是：4小时内出现冻结，每15天扫脸解封一次，请确认你的账号具有扫脸解封条件，否则请不要使用。
 
-# 部署方法
+## 使用限制
+本签名程序禁止由木落开发的SealDice（简称海豹骰）及其开发分支，通过gocq或包括但不限于在其他协议端进行直接调用或间接调用，整合和使用。
+当您使用本程序默认你同意了上述限制。
 
-**[Wiki](https://github.com/fuqiuluo/unidbg-fetch-qsign/wiki)**
+## 部署方法
+(编写中！)
 
-# 你可能需要的项目
+## 你可能需要的项目
 
 - [fix-protocol-version](https://github.com/cssxsh/fix-protocol-version)：基于**mirai**的qsign api对接。
 
-# 使用API
+## 使用API
 
-## [初始化QSign&刷新token](https://github.com/fuqiuluo/unidbg-fetch-qsign/blob/master/refresh_token/README.md)
+### [初始化QSign&刷新token](https://github.com/fuqiuluo/unidbg-fetch-qsign/blob/master/refresh_token/README.md)
 
-### 原始energy
+#### 原始energy
 
 ```kotlin
 # http://host:port/custom_energy?uin=[QQ]&salt=[SALT HEX]&data=[DATA]
@@ -36,7 +42,7 @@
 
 > 非专业人员勿用。
 
-### sign
+#### sign
 
 ```kotlin
 # http://host:port/sign?uin=[UIN]&qua=[QUA]&cmd=[CMD]&seq=[SEQ]&buffer=[BUFFER]
@@ -59,7 +65,7 @@
 POST的内容："uin=" + uin + "&qua=" + qua + "&cmd=" + cmd + "&seq=" + seq + "&buffer=" + buffer
 </details>
 
-### 登录包energy(tlv544)
+#### 登录包energy(tlv544)
 
 下面这个只是个例子
 
@@ -74,12 +80,5 @@ POST的内容："uin=" + uin + "&qua=" + qua + "&cmd=" + cmd + "&seq=" + seq + "
 | GUID    | 登录设备的GUID，将byte数组转换为HEX发送，必须是32长度的HEX字符串                     | ABCDABCDABCDABCDABCDABCDABCDABCD |
 | DATA    | QQ发送登录包的CmdId和SubCmdId，例子中810是登陆CmdId，9是SubCmdId             | 810_9                            |
 
-# 其他
+## 其他
 - 由于项目的特殊性，我们可能~~随时删除本项目~~且不会做出任何声明
-
-# 奇怪的交际援助
-
- - 昵称：**[咖啡]**  QQ：1456****68
- - 昵称：**RinsToln** QQ：339***8297302
- - 昵称：**菩提** QQ：919***595
- - 
