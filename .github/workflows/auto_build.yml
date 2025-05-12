@@ -3,10 +3,10 @@ name: Build and Upload Artifacts
 on:
   push:  # 监听所有 push 事件
     branches:
-      - main  # 可以修改为你的目标分支
+      - master  # 可以修改为你的目标分支
   pull_request:  # 监听 PR 事件
     branches:
-      - main
+      - master
 
 jobs:
   build:
